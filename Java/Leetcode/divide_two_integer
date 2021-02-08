@@ -1,0 +1,21 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+        int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE, halfMin = min >> 1;
+        if (dividend == min && divisor == -1) return max;
+        boolean flag = !((dividend > 0) ^ (divisor > 0));
+        dividend = -Math.abs(dividend);
+        divisor = -Math.abs(divisor);
+        int res = 0;
+        while (dividend <= divisor) {
+            int div = divisor, i = 1;
+            while (dividend <= div) {
+                dividend -= div;
+                res += i;
+                if (div < halfMin) break;
+                div <<= 1;
+                i <<= 1;
+            }
+        }
+        return flag ? res : -res;
+    }
+}
